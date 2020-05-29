@@ -10,7 +10,22 @@ Basicly, this is a try to implement something like a NTRIP caster with MQTT feat
 
 Attension: Topics are casesensitive!!
 
-# Topics:
+# Basic Workflow Description: v.0.1
++ Basestation(s) is/are publishing to MQTT broker (RTK/Base/...) and deliver basic information (needed for Mountpointlist and ..)
++ Basestationen are continuosly evaluating the RTCM input and presenting the avaliable feature (incl update if somthing new,..)
++ Caster is subscribing to broker and receiving all msg from connected basestations.
++ Caster is keeping track of avaliable basstations (all, old and active ones).
++ Caster is creating an Mountpointlist of possible active stations and publishing it to the broker under RTK/MNTPList/...
++ Caster can activate RTCM transmission of connected and active basstation if needed
++ Caster ar tranforming/copy all the necessary RTCM datar from the RTK/Base/... to the RTK/MNTP/... topic (readeable for all RTK users)
++ If a basestation is lost the last will show "off", the caster will remove it from the active Mountpointlist
++ Clients can connect to the broker (user/password protected) and post the user id, ths will request the caster to resend the Mountpointlist
++ Clients can select to subscribe the required RTCM msg from the disired MNTP (mountpoint)
++ If the Client is leaving, the lastwill is "byebye" is activated.
++ Caster can switch Off RTCM pubishing of the Basestations if the last client has closed the subscription.
+
+
+# More Details on the used Topics:
 
 # Basestation (MNTP) publish:
 Welcome msg: (transmitted when a new connection is established, or a feature is updated, .. )
@@ -67,7 +82,7 @@ commands to Basestation
 + RTK/MNTPList/<NAME of BASE>/Status/Position/Long/ [QOS = 1, retain = true, last_will = null] [read/write acces by caster app, read by clients ]
 
 # Clients publish:
-+ RTK/User/Subscribe/<NAME of USER>/ - "<NAME of MNTP>" to request MNTP transmission, caster will provide needet data if on the mountpointlist [QOS = 1, retain = false, last_will = "ByBy"] [read/write acces by clients app, read by caster ]
++ RTK/User/Subscribe/<NAME of USER>/ - "<NAME of MNTP>" to request MNTP transmission, caster will provide needet data if on the mountpointlist [QOS = 1, retain = false, last_will = "ByeBye"] [read/write acces by clients app, read by caster ]
 
 # Clients subscribe:
 initially and refresh if needed
