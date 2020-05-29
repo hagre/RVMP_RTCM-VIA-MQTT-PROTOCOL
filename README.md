@@ -14,15 +14,16 @@ Attension: Topics are casesensitive!!
 + Basestation(s) is/are publishing to MQTT broker (RTK/Base/...) and deliver basic information (needed for Mountpointlist and ..)
 + Basestationen are continuosly evaluating the RTCM input and presenting the avaliable feature (incl update if somthing new,..)
 + Caster is subscribing to broker and receiving all msg from connected basestations.
++ Only caters have permission to read RTK/Base/...  input
 + Caster is keeping track of avaliable basstations (all, old and active ones).
 + Caster is creating an Mountpointlist of possible active stations and publishing it to the broker under RTK/MNTPList/...
 + Caster can activate RTCM transmission of connected and active basstation if needed
-+ Caster ar tranforming/copy all the necessary RTCM datar from the RTK/Base/... to the RTK/MNTP/... topic (readeable for all RTK users)
++ Caster are tranforming/copy all the necessary RTCM datar from the RTK/Base/... to the RTK/MNTP/... topic (readeable for all RTK users)
 + If a basestation is lost the last will show "off", the caster will remove it from the active Mountpointlist
 + Clients can connect to the broker (user/password protected) and post the user id, ths will request the caster to resend the Mountpointlist
-+ Clients can select to subscribe the required RTCM msg from the disired MNTP (mountpoint)
++ Clients can select to subscribe to the required RTCM msg from the disired MNTP (mountpoint) or all of them. RTK/MNTP/<NAME of MNTP>/RTCM/# 
 + If the Client is leaving, the lastwill is "byebye" is activated.
-+ Caster can switch Off RTCM pubishing of the Basestations if the last client has closed the subscription.
++ Caster can switch off pubishing of the Basestations pubishing RTCM (maintaining in STBY) if the last client has closed the subscription.
 
 
 # More Details on the used Topics:
