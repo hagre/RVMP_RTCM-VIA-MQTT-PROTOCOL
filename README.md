@@ -2,9 +2,9 @@
 
 RVMP (RTCM-VIA-MQTT-PROTOCOL) V0.1 (first very basic approach, but some features for future are in preperation).
 
-In use by RVMT (RTCM Via MQTT Transmitter - https://github.com/hagre/RVMT-RTCM-VIA-MQTT-TRANSMITTER) using the MQTT msg/protocol (as a secure and opensource alternative to NTRIP) to get RTK correction data from BaseStations to Broker and to Rover GPS units.
+In use by RVMT (RTCM Via MQTT Transmitter - https://github.com/hagre/RVMT_RTCM-VIA-MQTT-TRANSMITTER) using the MQTT msg/protocol (as a secure and opensource alternative to NTRIP) to get RTK correction data from BaseStations to Broker and to Rover GPS units.
 
-Caster is on https://github.com/hagre/RVMT-RTCM-VIA-MQTT-CASTER
+Caster is on https://github.com/hagre/RVMT_RTCM-VIA-MQTT-CASTER
 
 Basicly, this is a try to implement something like a NTRIP caster with MQTT features. There are a lot of similarities to NTRIP (V1.0/V2.0), because it is a knowen and usefull protocol with most needet features for this task.
 
