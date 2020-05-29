@@ -6,7 +6,7 @@ In use by RVMT (RTCM Via MQTT Transmitter - https://github.com/hagre/RVMT_RTCM-V
 
 Caster is on https://github.com/hagre/RVMT_RTCM-VIA-MQTT-CASTER
 
-Basicly, this is a try to implement something like a NTRIP caster with MQTT features. There are a lot of similarities to NTRIP (V1.0/V2.0), because it is a knowen and usefull protocol with most needet features for this task.
+Basicly, this is a try to implement something like a NTRIP caster with MQTT features. There are a lot of similarities to NTRIP (V1.0/V2.0), because it is a knowen and usefull protocol with most needed features for this task.
 
 Attension: Topics are casesensitive!!
 
