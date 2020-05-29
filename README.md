@@ -1,4 +1,4 @@
-# RVMP-RTCM-Via-MQTT-Protocol
+# RVMP (RTCM-Via-MQTT-Protocol)
 
 RVMP (RTCM Via MQTT Protocol) V0.1 (first very basic approach, but some features for future are in preperation).
 
