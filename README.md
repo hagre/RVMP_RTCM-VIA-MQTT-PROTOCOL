@@ -105,10 +105,9 @@ or
 
 
 # Hints:
-MNTP - Mountpoint
-<NAME of MNTP>  == <NAME of BASE>- e.g. XYZ01
-  
-<TYPE of MSG> - e.g. 1074
++ MNTP - Mountpoint
++ <NAME of MNTP>  == <NAME of BASE>- e.g. XYZ01  
++ <TYPE of MSG> - e.g. 1074
 
 
 # further plans:
