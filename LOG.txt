@@ -1,1 +1,2 @@
 V0.1 - initial commit
+V0.2 - starting to include a "simple relay config" - when no cater is needed/active, the broker is just a relay for RTCM, Basestations are publishing as expected from a catster, clients just subscribe to desired topics (RTCM/msg)
