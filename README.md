@@ -1,25 +1,30 @@
 # RVMP (RTCM-VIA-MQTT-PROTOCOL)
 
-RVMP (RTCM-VIA-MQTT-PROTOCOL) V0.1 (first very basic approach, but some features for future are in preperation). (GNU GPL V3)
+RVMP (RTCM-VIA-MQTT-PROTOCOL) V0.2 (first very basic approach, but some features for future are in preperation). (GNU GPL V3)
 
 In use by RVMT (RTCM Via MQTT Transmitter - https://github.com/hagre/RVMT_RTCM-VIA-MQTT-TRANSMITTER) using the MQTT msg/protocol (as a secure and opensource alternative to NTRIP) to get RTK correction data from BaseStations to Broker and to Rover GPS units.
 
 Caster is on https://github.com/hagre/RVMT_RTCM-VIA-MQTT-CASTER
 
-Basicly, this is a try to implement something like a NTRIP caster with MQTT features. There are a lot of similarities to NTRIP (V1.0/V2.0), because it is a knowen and usefull protocol with most needed features for this task.
+Basicly, this is a try to implement something like a NTRIP caster with MQTT features. There are a lot of similarities to NTRIP (V1.0/V2.0), because it is a known and usefull protocol with most needed features for this task.
 
 Attension: Topics are casesensitive!!
 
-# Basic Workflow Description: v.0.1
-+ Basestation(s) is/are publishing to MQTT broker (RTK/Base/...) and deliver basic information (needed for Mountpointlist and ..)
+# Basic Workflow Description: v.0.2
++ Basestation(s) are checking if a caster exists/is implemented or a simple base-client relay configuration is used
++ Basestation(s) is/are publishing to MQTT broker (RTK/Base/...) and/or (RTK/MNTP/... - simple relay config) and deliver basic information (needed for Mountpointlist and ..)
 + Basestationen are continuosly evaluating the RTCM input and presenting the avaliable feature (incl update if somthing new,..)
-+ Caster is subscribing to broker and receiving all msg from connected basestations.
++ Basestationen have to present relevant MNTPList msg if in use as simple relay
+
++ Caster (if implemented) publish basic infos on RTK/Caster/... , to be recogniced by other users
++ Caster (if implemented) is subscribing to broker and receiving all msg from connected basestations.
 + Only caters have permission to read RTK/Base/...  input
 + Caster is keeping track of avaliable basstations (all, old and active ones).
 + Caster is creating an Mountpointlist of possible active stations and publishing it to the broker under RTK/MNTPList/...
 + Caster can activate RTCM transmission of connected and active basstation if needed
 + Caster are tranforming/copy all the necessary RTCM datar from the RTK/Base/... to the RTK/MNTP/... topic (readeable for all RTK users)
 + If a basestation is lost the last will show "off", the caster will remove it from the active Mountpointlist
+
 + Clients can connect to the broker (user/password protected) and post the user id, ths will request the caster to resend the Mountpointlist
 + Clients can select to subscribe to the required RTCM msg from the disired MNTP (mountpoint) or all of them. RTK/MNTP/<NAME of MNTP>/RTCM/# 
 + If the Client is leaving, the lastwill is "byebye" is activated.
