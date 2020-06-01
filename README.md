@@ -25,10 +25,10 @@ Attension: Topics are casesensitive!!
 + Caster are tranforming/copy all the necessary RTCM datar from the RTK/Base/... to the RTK/MNTP/... topic (readeable for all RTK users)
 + If a basestation is lost the last will show "off", the caster will remove it from the active Mountpointlist
 
-+ Clients can connect to the broker (user/password protected) and post the user id, ths will request the caster to resend the Mountpointlist
-+ Clients can select to subscribe to the required RTCM msg from the disired MNTP (mountpoint) or all of them. RTK/MNTP/<NAME of MNTP>/RTCM/# 
-+ If the Client is leaving, the lastwill is "byebye" is activated.
-+ Caster can switch off pubishing of the Basestations pubishing RTCM (maintaining in STBY) if the last client has closed the subscription.
++ Clients can connect to the broker (user/password protected) and post the user id, this will request the caster to resend the Mountpointlist
++ Clients can select to subscribe to the required RTCM msg from the desired MNTP (mountpoint) or all of them. RTK/MNTP/<NAME of MNTP>/RTCM/# 
++ If the Client is leaving, the lastwill "byebye" gets activated.
++ Caster can switch off publishing of the Basestations publishing RTCM (maintaining in STBY) if the last client has closed the subscription.
 
 
 # More Details on the used Topics:
