@@ -35,18 +35,18 @@ Attension: Topics are casesensitive!!
 
 # Basestation (MNTP) publish:
 Welcome msg: (transmitted when a new connection is established, or a feature is updated, .. )
-+ RTK/Base/(NAME of BASE)/Status/Tversion/ - e.g "2.2" - Version of transmitter firmware [QOS = 1, retain = true, last_will = null] [read acces only by caster app, read/write by Basestation ]
-+ RTK/Base/(NAME of BASE)/Status/Pversion/ - e.g "0.1" - Version of protocol [QOS = 1, retain = true, last_will = null] [read acces only by caster app, read/write by Basestation ]
-+ RTK/Base/(NAME of BASE)/Status/RTCM/(TYPE of MSG)/ - e.g "1", "0.5" or "30" - time in seconds between update (~frequenz) [QOS = 1, retain = true, last_will = null] [read acces only by caster app, read/write by Basestation ]
++ RTK/Base/(NAME of BASE)/Status/Tversion/ - e.g "2.2" - Version of transmitter firmware [QOS = 1, retain = true] [read acces only by caster app, read/write by Basestation ]
++ RTK/Base/(NAME of BASE)/Status/Pversion/ - e.g "0.1" - Version of protocol [QOS = 1, retain = true] [read acces only by caster app, read/write by Basestation ]
++ RTK/Base/(NAME of BASE)/Status/RTCM/(TYPE of MSG)/ - e.g "1", "0.5" or "30" - time in seconds between update (~frequenz) [QOS = 1, retain = true] [read acces only by caster app, read/write by Basestation ]
 + RTK/Base/(NAME of BASE)/Status/Operation/ - "ON" full working RTCM, "STBY" receiving RTCM, but not transmitting over MQTT, "ERROR" having some trouble, "OFF" - not avaliable  [QOS = 1, retain = true, last_will = "OFF"] [read acces only by caster app, read/write by Basestation ]
-+ RTK/Base/(NAME of BASE)/Status/Error/ - type of error e.g "NO_RTCM_INPUT"  [QOS = 1, retain = false, last_will = null] [read acces only by caster app, read/write by Basestation ] //further work required 
-+ //planning to implement: RTK/Base/(NAME of BASE)/Status/Position/Lat/ - LatPosition [QOS = 1, retain = true, last_will = null] [read acces only by caster app, read/write by Basestation ] //further work required 
-+ //planning to implement: RTK/Base/(NAME of BASE)/Status/Position/Long/ - LongPosition [QOS = 1, retain = true, last_will = null] [read acces only by caster app, read/write by Basestation ] //further work required 
-+ //planning to try: RTK/MNTP/(NAME of BASE)/Command/Out/PW/ - e.g "Password" [QOS = 1, retain = false, last_will = null] [read acces only by caster app, read/write by Basestation ] //further work required 
-+ //planning to try: RTK/MNTP/(NAME of BASE)/Command/Out/USER/ - e.g "Username" (? username == <NAME of MNTP>) [QOS = 1, retain = false, last_will = null] [read acces only by caster app, read/write by Basestation ] //further work required
++ RTK/Base/(NAME of BASE)/Status/Error/ - type of error e.g "NO_RTCM_INPUT"  [QOS = 1, retain = false] [read acces only by caster app, read/write by Basestation ] //further work required 
++ //planning to implement: RTK/Base/(NAME of BASE)/Status/Position/Lat/ - LatPosition [QOS = 1, retain = true] [read acces only by caster app, read/write by Basestation ] //further work required 
++ //planning to implement: RTK/Base/(NAME of BASE)/Status/Position/Long/ - LongPosition [QOS = 1, retain = true] [read acces only by caster app, read/write by Basestation ] //further work required 
++ //planning to try: RTK/MNTP/(NAME of BASE)/Command/Out/PW/ - e.g "Password" [QOS = 1, retain = false] [read acces only by caster app, read/write by Basestation ] //further work required 
++ //planning to try: RTK/MNTP/(NAME of BASE)/Command/Out/USER/ - e.g "Username" (? username == <NAME of MNTP>) [QOS = 1, retain = false] [read acces only by caster app, read/write by Basestation ] //further work required
 
 for each RTCM msg type:
-+ RTK/Base/NAME of BASE/RTCM/<TYPE of MSG>/ [retain = false, last_will = null] [read acces only by caster app, read/write by Basestation ]
++ RTK/Base/NAME of BASE/RTCM/<TYPE of MSG>/ [retain = false] [read acces only by caster app, read/write by Basestation ]
 
 # Basestation (MNTP) subscribe:
 + RTK/Base/(NAME of BASE)/Command/In/RTCM/ 
@@ -76,16 +76,16 @@ some calculation in the caster ....
 - keep track of the Basestations
 
 # Caster publish:
-+ RTK/MNTP/(NAME of MNTP)/RTCM/(TYPE of MSG)/ [retain = false, last_will = null] [read acces by all RTK users, read/write by caster]
++ RTK/MNTP/(NAME of MNTP)/RTCM/(TYPE of MSG)/ [retain = false] [read acces by all RTK users, read/write by caster]
 commands to Basestation
-+ RTK/MNTP/(NAME of MNTP)/Command/In/RTCM/ - "ON" or "OFF" to activate/deactivate RTCM transmission if required [QOS = 1, retain = false, last_will = null] [read/write acces by caster app, read by correct Basestation ]
-+ RTK/MNTP/(NAME of MNTP)/Command/In/GPS/ - "REBOOT" to force an GPS reboot [retain = false, last_will = null] [QOS = 1, read/write acces by caster app, read by correct Basestation ]
-+ RTK/MNTP/(NAME of MNTP)/Command/In/Transmitter/ - "REBOOT" to force an transmitter reboot (e.g ESP32 modul) [QOS = 1, retain = false, last_will = null] [read/write acces by caster app, read by correct Basestation ]
-+ RTK/MNTPList/(NAME of BASE)/Status/Pversion/ [QOS = 1, retain = true, last_will = null] [read/write acces by caster app, read by clients ]
-+ RTK/MNTPList/(NAME of BASE)/Status/RTCM/<TYPE of MSG>/  [QOS = 1, retain = true, last_will = null] [read/write acces by caster app, read by clients ]
-+ RTK/MNTPList/(NAME of BASE)/Status/Operation/  [QOS = 1, retain = true, last_will = null] [read/write acces by caster app, read by clients ]
-+ RTK/MNTPList/(NAME of BASE)/Status/Position/Lat/ [QOS = 1, retain = true, last_will = null] [read/write acces by caster app, read by clients ]
-+ RTK/MNTPList/(NAME of BASE)/Status/Position/Long/ [QOS = 1, retain = true, last_will = null] [read/write acces by caster app, read by clients ]
++ RTK/MNTP/(NAME of MNTP)/Command/In/RTCM/ - "ON" or "OFF" to activate/deactivate RTCM transmission if required [QOS = 1, retain = false] [read/write acces by caster app, read by correct Basestation ]
++ RTK/MNTP/(NAME of MNTP)/Command/In/GPS/ - "REBOOT" to force an GPS reboot [retain = false] [QOS = 1, read/write acces by caster app, read by correct Basestation ]
++ RTK/MNTP/(NAME of MNTP)/Command/In/Transmitter/ - "REBOOT" to force an transmitter reboot (e.g ESP32 modul) [QOS = 1, retain = false] [read/write acces by caster app, read by correct Basestation ]
++ RTK/MNTPList/(NAME of BASE)/Status/Pversion/ [QOS = 1, retain = true] [read/write acces by caster app, read by clients ]
++ RTK/MNTPList/(NAME of BASE)/Status/RTCM/<TYPE of MSG>/  [QOS = 1, retain = true] [read/write acces by caster app, read by clients ]
++ RTK/MNTPList/(NAME of BASE)/Status/Operation/  [QOS = 1, retain = true] [read/write acces by caster app, read by clients ]
++ RTK/MNTPList/(NAME of BASE)/Status/Position/Lat/ [QOS = 1, retain = true] [read/write acces by caster app, read by clients ]
++ RTK/MNTPList/(NAME of BASE)/Status/Position/Long/ [QOS = 1, retain = true] [read/write acces by caster app, read by clients ]
 
 # Clients publish:
 + RTK/User/Subscribe/(NAME of USER)/ - "(NAME of MNTP)" to request MNTP transmission, caster will provide needet data if on the mountpointlist [QOS = 1, retain = false, last_will = "ByeBye"] [read/write acces by clients app, read by caster ]
@@ -105,8 +105,8 @@ or
 + //planning: RTK/Base/(NAME of BASE)/Serial/Out/
 
 # //MaintenanceClient publish:
-+ //planning: RTK/Base/(NAME of BASE)/Serial/In/ -  Serial transmission to GPS if required (config of chip) [retain = false, last_will = null] //serial transmission will be included in a later version
-+ //planning to try: RTK/Base/(NAME of BASE)/Command/In/Serial/ - "ON" or "OFF" to activate/deactivate Serial transmission to GPS if required (config of chip) [retain = false, last_will = null] //serial transmission will be included in a later version
++ //planning: RTK/Base/(NAME of BASE)/Serial/In/ -  Serial transmission to GPS if required (config of chip) [retain = false] //serial transmission will be included in a later version
++ //planning to try: RTK/Base/(NAME of BASE)/Command/In/Serial/ - "ON" or "OFF" to activate/deactivate Serial transmission to GPS if required (config of chip) [retain = false] //serial transmission will be included in a later version
 
 
 # Hints:
