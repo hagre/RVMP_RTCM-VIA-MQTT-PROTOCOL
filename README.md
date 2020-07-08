@@ -35,8 +35,8 @@ Attension: Topics are casesensitive!!
 
 # Basestation (MNTP) publish:
 Welcome msg: (transmitted when a new connection is established, or a feature is updated, .. )
-+ RTK/Base/(NAME of BASE)/Status/Firmware/ - e.g "Ver 2.2" - Version of transmitter firmware [QOS = 1, retain = true] [read acces only by caster app, read/write by Basestation ]
-+ RTK/Base/(NAME of BASE)/Status/Protocol/ - e.g "0.1" - Version of protocol [QOS = 1, retain = true] [read acces only by caster app, read/write by Basestation ]
++ RTK/Base/(NAME of BASE)/Status/FirmwareVer/ - e.g "2.2" - Version of transmitter firmware [QOS = 1, retain = true] [read acces only by caster app, read/write by Basestation ]
++ RTK/Base/(NAME of BASE)/Status/ProtocolVer/ - e.g "0.1" - Version of protocol [QOS = 1, retain = true] [read acces only by caster app, read/write by Basestation ]
 + RTK/Base/(NAME of BASE)/Status/RTCM/(TYPE of MSG)/ - e.g "1", "0.5" or "30" - time in seconds between update (~frequenz) [QOS = 1, retain = true] [read acces only by caster app, read/write by Basestation ]
 + RTK/Base/(NAME of BASE)/Status/Operation/ - "ON" full working RTCM, "STBY" receiving RTCM, but not transmitting over MQTT, "ERROR" having some trouble, "OFF" - not avaliable  [QOS = 1, retain = true, last_will = "OFF"] [read acces only by caster app, read/write by Basestation ]
 + RTK/Base/(NAME of BASE)/Status/Error/ - type of error e.g "NO_RTCM_INPUT"  [QOS = 1, retain = false] [read acces only by caster app, read/write by Basestation ] //further work required 
