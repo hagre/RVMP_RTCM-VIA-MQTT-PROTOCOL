@@ -35,8 +35,8 @@ Attension: Topics are casesensitive!!
 
 # Basestation (MNTP) publish:
 Welcome msg: (transmitted when a new connection is established, or a feature is updated, .. )
-+ RTK/Base/(NAME of BASE)/Status/Tversion/ - e.g "2.2" - Version of transmitter firmware [QOS = 1, retain = true] [read acces only by caster app, read/write by Basestation ]
-+ RTK/Base/(NAME of BASE)/Status/Pversion/ - e.g "0.1" - Version of protocol [QOS = 1, retain = true] [read acces only by caster app, read/write by Basestation ]
++ RTK/Base/(NAME of BASE)/Status/Firmware/ - e.g "Ver 2.2" - Version of transmitter firmware [QOS = 1, retain = true] [read acces only by caster app, read/write by Basestation ]
++ RTK/Base/(NAME of BASE)/Status/Protocol/ - e.g "0.1" - Version of protocol [QOS = 1, retain = true] [read acces only by caster app, read/write by Basestation ]
 + RTK/Base/(NAME of BASE)/Status/RTCM/(TYPE of MSG)/ - e.g "1", "0.5" or "30" - time in seconds between update (~frequenz) [QOS = 1, retain = true] [read acces only by caster app, read/write by Basestation ]
 + RTK/Base/(NAME of BASE)/Status/Operation/ - "ON" full working RTCM, "STBY" receiving RTCM, but not transmitting over MQTT, "ERROR" having some trouble, "OFF" - not avaliable  [QOS = 1, retain = true, last_will = "OFF"] [read acces only by caster app, read/write by Basestation ]
 + RTK/Base/(NAME of BASE)/Status/Error/ - type of error e.g "NO_RTCM_INPUT"  [QOS = 1, retain = false] [read acces only by caster app, read/write by Basestation ] //further work required 
@@ -49,6 +49,7 @@ for each RTCM msg type:
 + RTK/Base/NAME of BASE/RTCM/<TYPE of MSG>/ [retain = false] [read acces only by caster app, read/write by Basestation ]
 
 # Basestation (MNTP) subscribe:
+ RTK/Caster/Status/Operation/
 + RTK/Base/(NAME of BASE)/Command/In/RTCM/ 
 + RTK/Base/(NAME of BASE)/Command/In/GPS/ 
 + RTK/Base/(NAME of BASE)/Command/In/Transmitter/ 
@@ -56,16 +57,16 @@ for each RTCM msg type:
 + //planning to try: RTK/Base/(NAME of BASE)/Serial/In/ 
 
 # Caster subscribe:
-+ RTK/Base/(NAME of BASE)/Status/Tversion/ 
-+ RTK/Base/(NAME of BASE)/Status/Pversion/ 
-+ RTK/Base/(NAME of BASE)/Status/RTCM/(TYPE of MSG)/ 
-+ RTK/Base/(NAME of BASE)/Status/Operation/ 
-+ RTK/Base/(NAME of BASE)/Status/Error/
-+ RTK/Base/(NAME of BASE)/Status/Position/Lat/
-+ RTK/Base/(NAME of BASE)/Status/Status/Position/Long/
-+ //planning to try: RTK/MNTP/(NAME of BASE)/Command/Out/PW/
-+ //planning to try: RTK/MNTP/(NAME of BASE)/Command/Out/USER/
-+ RTK/Base/(NAME of BASE)/RTCM/#
++ RTK/Base/+/Status/Firmware/ 
++ RTK/Base/+/Status/Protocol/ 
++ RTK/Base/+/Status/RTCM/(TYPE of MSG)/ 
++ RTK/Base/+/Status/Operation/ 
++ RTK/Base/+/Status/Error/
++ RTK/Base/+/Status/Position/Lat/
++ RTK/Base/+/Status/Status/Position/Long/
++ //planning to try: RTK/MNTP/+/Command/Out/PW/
++ //planning to try: RTK/MNTP/+/Command/Out/USER/
++ RTK/Base/+/RTCM/#
 
 some calculation in the caster ....  
 - acvtivate or deactivate Basestations
@@ -76,13 +77,14 @@ some calculation in the caster ....
 - keep track of the Basestations
 
 # Caster publish:
++ RTK/Caster/Status/Operation/ - "ON" full working "OFF" - not avaliable  [QOS = 1, retain = true, last_will = "OFF"] [read acces by all RTK users, read/write by caster]
 + RTK/MNTP/(NAME of MNTP)/RTCM/(TYPE of MSG)/ [retain = false] [read acces by all RTK users, read/write by caster]
 commands to Basestation
 + RTK/MNTP/(NAME of MNTP)/Command/In/RTCM/ - "ON" or "OFF" to activate/deactivate RTCM transmission if required [QOS = 1, retain = false] [read/write acces by caster app, read by correct Basestation ]
 + RTK/MNTP/(NAME of MNTP)/Command/In/GPS/ - "REBOOT" to force an GPS reboot [retain = false] [QOS = 1, read/write acces by caster app, read by correct Basestation ]
 + RTK/MNTP/(NAME of MNTP)/Command/In/Transmitter/ - "REBOOT" to force an transmitter reboot (e.g ESP32 modul) [QOS = 1, retain = false] [read/write acces by caster app, read by correct Basestation ]
-+ RTK/MNTPList/(NAME of BASE)/Status/Pversion/ [QOS = 1, retain = true] [read/write acces by caster app, read by clients ]
-+ RTK/MNTPList/(NAME of BASE)/Status/RTCM/<TYPE of MSG>/  [QOS = 1, retain = true] [read/write acces by caster app, read by clients ]
++ RTK/MNTPList/(NAME of BASE)/Status/Protocol/ [QOS = 1, retain = true] [read/write acces by caster app, read by clients ]
++ RTK/MNTPList/(NAME of BASE)/Status/RTCM/(TYPE of MSG)/  [QOS = 1, retain = true] [read/write acces by caster app, read by clients ]
 + RTK/MNTPList/(NAME of BASE)/Status/Operation/  [QOS = 1, retain = true] [read/write acces by caster app, read by clients ]
 + RTK/MNTPList/(NAME of BASE)/Status/Position/Lat/ [QOS = 1, retain = true] [read/write acces by caster app, read by clients ]
 + RTK/MNTPList/(NAME of BASE)/Status/Position/Long/ [QOS = 1, retain = true] [read/write acces by caster app, read by clients ]
@@ -111,7 +113,7 @@ or
 
 # Hints:
 + MNTP - Mountpoint
-+ (NAME of MNTP)  == "<NAME of BASE>"- e.g. XYZ01  
++ (NAME of MNTP)  == "(NAME of BASE)"- e.g. XYZ01  
 + (TYPE of MSG) - e.g. 1074
 
 
