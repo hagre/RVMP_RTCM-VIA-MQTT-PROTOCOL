@@ -13,9 +13,11 @@ Attension: Topics are casesensitive!!
 The basic system setup can be:
 
 For most users with 1 Base and 1 or more Rovers -----------------> My focus until V2.0
+
 1.) Base (Transmitter) - via MQTT - Broker/Server - via MQTT - Client/Receiver/Rover
 
 For users with more than 1 Base and different "customers" with lots of rovers (accountmanagement) -----------------> Not until V2.0
+
 2.) Base (Transmitter) - via MQTT - Broker/Server - via MQTT - Caster (Relaying/managing the Topics) - via MQTT - Client/Receiver/Rover
                                       
 
